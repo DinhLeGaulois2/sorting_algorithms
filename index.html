@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Sort Algorithms</title>
+	<style>
+		#displayArea, .mytitle{
+			background-color:black;
+			color:cyan;
+			padding:30px;
+			font-size: 25px;
+			text-align: center;
+		}
+	</style>
+	<script
+		src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+		crossorigin="anonymous"></script>
+	<script src="algos/sortMerge.js"></script>
+	<script src="algos/sortBubble.js"></script>
+	<script src="algos/sortHeap.js"></script>
+	<script src="algos/quicksort.js"></script>
+	<script src="algos/sortShell.js"></script>
+	<script src="algos/sortInsertion.js"></script>
+	<script src="algos/sortSelection.js"></script>
+	<script src="algos/sortBinaryTree.js"></script>
+</head>
+<body>
+	<p class="mytitle">Sort Algorithms</p>
+    <h3>How Many Numbers (will be selected randomly)?</h3>
+	<input type="radio" name="totalNumber" class="total" value="10">10</input>
+	<input type="radio" name="totalNumber" class="total" value="50">50</input>
+	<input type="radio" name="totalNumber" class="total" value="100">100</input>
+	<input type="radio" name="totalNumber" class="total" value="150">150</input>
+	<input type="radio" name="totalNumber" class="total" value="200">200</input>
+	<input type="radio" name="totalNumber" class="total" value="250">250</input>
+	<hr>
+    <h3>What Algorithm?</h3>
+	<p>(Click on the Name to See Code of the Algorithm)</p>
+	<input type="radio" name="algoSelected" class="choice" value="1">
+			<a href="algos/sortInsertion.js" target="_blank">Insertion</a></input>
+	<input type="radio" name="algoSelected" class="choice" value="2">
+			<a href="algos/sortMerge.js" target="_blank">Merge</a></input>
+	<input type="radio" name="algoSelected" class="choice" value="3">
+			<a href="algos/sortBubble.js" target="_blank">Bubble</a></input>
+	<input type="radio" name="algoSelected" class="choice" value="4">
+			<a href="algos/sortSelection.js" target="_blank">Selection</a></input>
+	<input type="radio" name="algoSelected" class="choice" value="5">
+			<a href="algos/sortShell.js" target="_blank">Shell Sort</a></input>
+	<input type="radio" name="algoSelected" class="choice" value="6">
+			<a href="algos/quicksort.js" target="_blank">Quick Sort</a></input>
+	<input type="radio" name="algoSelected" class="choice" value="7">
+			<a href="algos/sortHeap.js" target="_blank">Heap Sort</a></input>
+	<input type="radio" name="algoSelected" class="choice" value="8">
+			<a href="algos/sortBinaryTree.js" target="_blank">Binary Tree</a></input>
+	<hr><br>
+	<div id="displayArea">Select Quantity of Numbers AND The Algorithm</div>
+		
+</body>
+<script type="text/javascript">
+	let listNumbers = [];
+	let biggestNumber = 1500;
+	let smallestNumber = 20;
+	let totalNum = 0;
+	let algoInd = -1;
+	$(".total").on("click", function(){
+		totalNum = this.value;
+		if(algoInd>0){
+			show();
+			$(this).prop('checked', false);
+			$(".choice").prop('checked', false);
+		}
+		else document.getElementById("displayArea").innerHTML =  "";
+	});
+
+	
+	$(".choice").on("click", function(){
+		algoInd = this.value;
+		if(totalNum>0){
+			show();
+			$(".total").prop('checked', false);
+			$(this).prop('checked', false);
+		}
+		else document.getElementById("displayArea").innerHTML =  "";
+	});
+
+	function generation(){
+		for(let i=0 ; i<totalNum ; i++)
+			listNumbers.push(Math.floor(Math.random()*(biggestNumber-smallestNumber) + smallestNumber));
+	}
+
+	function show(){
+		generation();
+		let msg = "Algo Used: " + algoInd2Name(algoInd) + "<br><hr><br>";
+		msg += "Original List:<br>" + listNumbers.reduce((a, b) => a + ", " + b);
+		msg += "<hr>Sorted List:<br>" + runAlgo(algoInd);
+		document.getElementById("displayArea").innerHTML =  msg;
+		totalNum = 0;
+		algoInd = -1;
+		listNumbers = [];
+	}
+
+	function algoInd2Name(num){
+		if(num==1) return "Insertion";
+		else if(num==2) return "Merge";
+		else if(num==3) return "Bubble";
+		else if(num==4) return "Selection";
+		else if(num==5) return "Shellsort";
+		else if(num==6) return "Quicksort";
+		else if(num==7) return "Heap Sort";
+		return "Binary Tree";
+	}
+
+	function runAlgo(num){
+		if(num==1) {
+			sortInsertion.numbers = listNumbers;
+			return sortInsertion.getSortedList();
+		}
+		else if(num==2) {
+			sortMerge.numbers = listNumbers;
+			return sortMerge.getSortedList();
+		}
+		else if(num==3) {
+			sortBubble.numbers = listNumbers;
+			return sortBubble.getSortedList();
+		}
+		else if(num==4){
+			sortSelection.numbers = listNumbers;
+			return sortSelection.getSortedList();
+		}
+		else if(num==5) {
+			sortShell.numbers = listNumbers;
+			return sortShell.getSortedList();
+		}
+		else if(num==6) {
+			quicksort.numbers = listNumbers;
+			return quicksort.getSortedList();
+		}
+		else if(num==7) {
+			sortHeap.numbers = listNumbers;
+			return sortHeap.getSortedList();
+		}
+		else if(num==8) {
+			sortBinaryTree.numbers = listNumbers;
+			return sortBinaryTree.getSortedList();
+		}
+	}
+	// Made by Dinh HUYNH - Florida April, 2017 - All Right Reserved
+</script>
+</html>
