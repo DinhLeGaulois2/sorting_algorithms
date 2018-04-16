@@ -39,6 +39,7 @@ var sortBinaryTree = {
 	},
 
 	buildTree:function(){
+		sortBinaryTree.theRoot = null; // Delete any existing tree
 		sortBinaryTree.numbers.map(a => sortBinaryTree.insert(a));
 	},
 
