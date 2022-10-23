@@ -17,5 +17,4 @@ Just double-click to the file "**index.html**"
 ---------------
 
 ## Author
-* Dinh HUYNH - All Rights Reserved!
-* dinh.hu19@yahoo.com
+* Dinh HUYNH
